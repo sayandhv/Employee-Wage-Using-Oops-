@@ -4,12 +4,19 @@ public class Employee {
 		 
 	final int IS_PRESENT = 1;
     final int FULL_TIME = 1;
-    final int WORKING_DAYS = 20;
-    int fullDayHr= 16;
-    int wagePerHr = 20;
+    int FULL_DAY_HR= 16;
+    int workingDays;
+    int wagePerHr;
+    int totalAttendance = 0;
+    int totalHr = 0;
     
+    public Employee(int workingDays , int wagePerHr){
+        this.workingDays = workingDays;
+        this.wagePerHr = wagePerHr;
+    }
     public boolean checkIsPresent(int empCheck){
         if(empCheck == IS_PRESENT){ 
+            totalAttendance++;
             return true;
         }
         else{ 
@@ -18,14 +25,15 @@ public class Employee {
     }
     public int calcDailyEmpWage(int empType){
 
-         int dailyEmpWage = 0;
+        int dailyEmpWage = 0;
         switch(empType){
-            case  FULL_TIME : 
-                dailyEmpWage =  wagePerHr * fullDayHr;
+            case  FULL_TIME :
+                totalHr += FULL_DAY_HR;
+                dailyEmpWage =  wagePerHr * FULL_DAY_HR;
             break;
-            default : 
+            default :
+                totalHr += FULL_DAY_HR / 2; 
                 dailyEmpWage = dailyEmpWage / 2;
-                
         }
         return dailyEmpWage;
     }
@@ -33,12 +41,15 @@ public class Employee {
 
         int monthlyWage = 0;
         int dailyWage;
-        for(int day=1; day<=WORKING_DAYS; day++){
-            int empCheck = (int)(Math.random() * 10) % 2;
-            if(checkIsPresent(empCheck)){    
-                int empType = (int)(Math.random() * 10) % 2;
-                dailyWage = calcDailyEmpWage(empType);   
-                monthlyWage += dailyWage;
+    
+        while(totalAttendance <=20 && totalHr <=100){
+            for(int day=1; day<=workingDays; day++){
+                int empCheck = (int)(Math.random() * 10) % 2;
+                if(checkIsPresent(empCheck)){
+                    int empType = (int)(Math.random() * 10) % 2;
+                    dailyWage = calcDailyEmpWage(empType);   
+                    monthlyWage += dailyWage;
+                }
             }
         }
         return monthlyWage;
