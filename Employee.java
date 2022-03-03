@@ -1,17 +1,20 @@
 package com.Bridgelabz;
 
 public class Employee {
+		 
+		  int IS_PRESENT = 1;
+		  int WAGE_PER_HR=20;
+		  int FULL_DAY_HR=8;  
+		  public boolean checkIsPresent(double empCheck){
+		        if(empCheck == IS_PRESENT)
+		            return true;
+		        else
+		            return false; 
+		    }
 
-	public static void main(String[] args) {
-	     Employee emp = new Employee();
-	    
+		  public int calcDailyEmpWage(){
+		        int dailyEmpWage =  WAGE_PER_HR * FULL_DAY_HR;
+		        return  dailyEmpWage; 
 	}
-	  int IS_PRESENT = 1;
-	    public void checkIsPresent(double empCheck){
-	        if(empCheck == IS_PRESENT)
-	            System.out.println("Employee is Present");
-	        else
-	            System.out.println("Employee is Absent"); 
-	    }
-
+	
 }
